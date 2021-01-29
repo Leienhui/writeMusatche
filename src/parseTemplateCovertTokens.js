@@ -10,9 +10,9 @@ export default function parseTemplateCovertTokens() {
         let returnWords = scanner.scanUtil('{{')
         if (returnWords != '') {
             if (returnWords[0] == '#') {
-                tokens.push('#', returnWords.substring(1))
+                tokens.push(['#', returnWords.substring(1)])
             } else if (returnWords[0] == '/') {
-                tokens.push('/', returnWords.substring(1))
+                tokens.push(['/', returnWords.substring(1)])
 
             } else {
                 //  将文字token加入数组  
@@ -25,10 +25,17 @@ export default function parseTemplateCovertTokens() {
         scanner.scan('{{')
         returnWords = scanner.scanUtil('}}')
         if (returnWords != '') {
-            //  将变量token加入数组  
-            tokens.push(['name', returnWords])
-        }
+            if (returnWords[0] == '#') {
+                tokens.push(['#', returnWords.substring(1)])
+            } else if (returnWords[0] == '/') {
+                tokens.push(['/', returnWords.substring(1)])
 
+            } else {
+                //  将文字token加入数组  
+                tokens.push(['name', returnWords])
+            }
+
+        }
         scanner.scan('}}')
     }
     // 返回折叠收集的tokens
