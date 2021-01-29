@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 引入虚拟打包文件 -->
+    <!-- 这就是这个项目中要暴露的东西 -->
+    <script src="/xuni/bundle.js"></script>
+    <h1>您好</h1>
+    <script>
+       // 模板字符串
+       let templateStr = `
+        <ul>
+            {{#arr}}
+                    <li>
+                     我的名字{{name}}
+                       <p>我的爱好是：{{.}}</p>
+                   </li>
+            {{/arr}}
+        </ul>
+        `
+        // 数据
+        let data = {}
+        // 调用render函数
+        myTemplateEngine.render(templateStr,data)
+    </script>
+</body>
+</html>
